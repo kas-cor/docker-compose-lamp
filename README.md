@@ -24,19 +24,20 @@ As of now, we have several different PHP versions. Use appropriate php version a
 * 7.4.x
 * 8.0.x
 * 8.1.x
+* 8.4.x
 
 ## Installation
 
 * Clone this repository on your local computer
 * configure .env as needed
-* Run the `docker-compose up -d`.
+* Run the `docker compose up -d`.
 
 ```shell
 git clone https://github.com/kas-cor/docker-compose-lamp.git
 cd docker-compose-lamp/
 cp sample.env .env
 // modify sample.env as needed
-docker-compose up -d
+docker compose up -d
 // visit localhost
 ```
 
@@ -128,20 +129,20 @@ By default following modules are enabled.
 
 > If you want to enable more modules, just update `./bin/phpX/Dockerfile`. You can also generate a PR and we will merge
 > if seems good for general purpose.
-> You have to rebuild the docker image by running `docker-compose build` and restart the docker containers.
+> You have to rebuild the docker image by running `docker compose build` and restart the docker containers.
 
 #### Connect via SSH
 
-You can connect to web server using `docker-compose exec` command to perform various operation on it. Use below command
+You can connect to web server using `docker compose exec` command to perform various operation on it. Use below command
 to login to container via ssh.
 
 ```shell
-docker-compose exec webserver bash
+docker compose exec webserver bash
 ```
 
 ## PHP
 
-The installed version of php depends on your `.env`file.
+The installed version of php depends on your `.env` file.
 
 #### Extensions
 
@@ -165,7 +166,7 @@ May differ for PHP Versions <7.x.x
 
 > If you want to install more extension, just update `./bin/webserver/Dockerfile`. You can also generate a PR and we
 > will merge if it seems good for general purpose.
-> You have to rebuild the docker image by running `docker-compose build` and restart the docker containers.
+> You have to rebuild the docker image by running `docker compose build` and restart the docker containers.
 
 ## phpMyAdmin
 

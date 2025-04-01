@@ -14,7 +14,7 @@ services:
       - ${DOCUMENT_ROOT-./www}:/var/www/html
       - ${PHP_INI-./config/php/php.ini}:/usr/local/etc/php/php.ini
       - ${VHOSTS_DIR-./config/vhosts}:/etc/apache2/sites-enabled
-      - ${LOG_DIR-./logs/apache2}:/var/log/apache2
+      - ${ETC_HOSTS_DIR-./config/etc-hosts}:/tmp/etc-hosts
     environment:
       APACHE_DOCUMENT_ROOT: ${APACHE_DOCUMENT_ROOT-/var/www/html}
       PMA_PORT: ${HOST_MACHINE_PMA_PORT}
@@ -55,6 +55,7 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: '${COMPOSE_PROJECT_NAME}-phpmyadmin'
+    restart: 'always'
     links:
       - database
     environment:
@@ -73,11 +74,11 @@ services:
       - /sessions
       - ${PHP_INI-./config/php/php.ini}:/usr/local/etc/php/conf.d/php-phpmyadmin.ini
   pgadmin:
+    image: dpage/pgadmin4
     container_name: '${COMPOSE_PROJECT_NAME}-pgadmin'
+    restart: 'always'
     links:
       - postgres
-    image: dpage/pgadmin4
-    restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: root
@@ -86,8 +87,9 @@ services:
     volumes:
       - ./config/pgadmin/servers.json:/pgadmin4/servers.json
   redis:
-    container_name: '${COMPOSE_PROJECT_NAME}-redis'
     image: redis:latest
+    container_name: '${COMPOSE_PROJECT_NAME}-redis'
+    restart: 'always'
     environment:
       ALLOW_EMPTY_PASSWORD: "yes"
       REDIS_NODES: "redis_cluster_of_one"
@@ -98,5 +100,6 @@ services:
   mailhog:
     image: mailhog/mailhog
     container_name: '${COMPOSE_PROJECT_NAME}-mailhog'
+    restart: 'always'
     ports:
       - '8025:8025'

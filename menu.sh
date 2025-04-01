@@ -34,14 +34,14 @@ else
 fi
 
 case $select_command in
-1) docker-compose -f ${current_yml} up -d --remove-orphans;;
-2) docker-compose -f ${current_yml} down --remove-orphans;;
-3) docker-compose -f ${current_yml} restart;;
-4) docker-compose -f ${current_yml} build --no-cache;;
-5) docker-compose -f ${current_yml} pull;;
-6) docker-compose -f ${current_yml} exec webserver bash;;
-7) docker-compose -f ${current_yml} exec database bash;;
-8) docker-compose -f ${current_yml} exec postgres bash;;
-9) docker-compose -f ${current_yml} exec redis bash;;
+1) docker compose -f ${current_yml} up -d --remove-orphans;;
+2) docker compose -f ${current_yml} down --remove-orphans;;
+3) docker compose -f ${current_yml} restart;;
+4) COMPOSE_BAKE=true docker compose -f ${current_yml} build;;
+5) docker compose -f ${current_yml} pull;;
+6) docker compose -f ${current_yml} exec webserver bash;;
+7) docker compose -f ${current_yml} exec database bash;;
+8) docker compose -f ${current_yml} exec postgres bash;;
+9) docker compose -f ${current_yml} exec redis bash;;
 *) echo "Unknow command";;
 esac
