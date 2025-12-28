@@ -163,6 +163,8 @@ May differ for PHP Versions <7.x.x
 * xml
 * xmlrpc
 * gd
+* memcached
+* redis
 
 > If you want to install more extension, just update `./bin/webserver/Dockerfile`. You can also generate a PR and we
 > will merge if it seems good for general purpose.

@@ -13,7 +13,7 @@ RUN apt-get update -y --fix-missing && \
 # Install useful tools and install important libaries
 RUN apt-get install -y --no-install-recommends --fix-missing apt-utils nano wget dialog librdkafka-dev libsqlite3-dev libsodium-dev libsqlite3-0 \
     default-mysql-client zlib1g-dev libzip-dev libpq-dev libicu-dev build-essential git curl libonig-dev unzip libcurl4 ca-certificates gnupg \
-    libcurl4-openssl-dev zip golang-go openssl libc-client-dev libkrb5-dev libmagickwand-dev libldap2-dev libnss-ldap libpam-ldap ldap-utils
+    libcurl4-openssl-dev zip golang-go openssl libc-client-dev libkrb5-dev libmagickwand-dev libldap2-dev libnss-ldap libpam-ldap ldap-utils libmemcached-dev
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -42,6 +42,10 @@ RUN cd /usr/local/src && \
 # Install openswoole
 RUN pecl install openswoole-22.1.2 && \
     docker-php-ext-enable openswoole
+
+# Install Memcached
+RUN pecl install memcached && \
+    docker-php-ext-enable memcached
 
 # Other PHP81 Extensions
 RUN docker-php-ext-install pdo_mysql && \
